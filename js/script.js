@@ -57,15 +57,10 @@ var myPlayList = [
 $( document ).ready(function() {
 	// everything inside this function happens as soon as the page loads!
 	displayList(myPlayList);
-$("#submit").click(function() {
-	var newSong = {
-        "title": $("#title").val(),
-        "artist": $("#artist").val(),
-        "playURL": $("#play-link").val(),
-        "imageURL": $("#album-image").val()
-    };
-	myPlayList.push(newSong);
-	console.log(myPlayList);
+	
+	$("#submit").click(function() {
+	clearList();
+	console.log("hi");
 	});
 
 });
@@ -82,24 +77,29 @@ function displaySong(songObject){
 
 // displayList takes in an array of song objects, and it uses the information from each song object
 //    to create an HTML element and append it to the playlist on the page
-function displayList(songsObject){
+function displayList(songsArray){
 	 for (var i = 0; i < myPlayList.length; i++){
-	    $("body").append(myPlayList[i].title);
-	    $("body").append(myPlayList[i].artist);
-	    $("body").append('<img src = "' + myPlayList[i].imageURL + '"</p>');
-	    $("body").append('<a src = "' + myPlayList[i].playURL + '"</a>');
+	 	displaySong(myPlayList[i]);
+	    // $("body").append(myPlayList[i].title);
+	    // $("body").append(myPlayList[i].artist);
+	    // $("body").append('<img src = "' + myPlayList[i].imageURL + '"</p>');
+	    // $("body").append('<a src = "' + myPlayList[i].playURL + '"</a>');
 	}
 }
 
 // clearList removes all the content from the playlist on the page
 function clearList(){
-
-
-
+	$("#songInfo").html("");
 }
 
 // addSong takes inputs from the input boxes, organizes them into a new song object, and
 //    pushes a new song to the playlist array
 function addSong(){
-	console.log(myPlayList);
+	var newSong = {
+        "title": $("#title").val(),
+        "artist": $("#artist").val(),
+        "playURL": $("#play-link").val(),
+        "imageURL": $("#album-image").val()
+    };
+	myPlayList.push(newSong);
 }
