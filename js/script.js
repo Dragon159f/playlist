@@ -56,9 +56,12 @@ var myPlayList = [
 // DOCUMENT READY FUNCTION
 $( document ).ready(function() {
 	// everything inside this function happens as soon as the page loads!
-	displayList(myPlayList);
+	$("#submit").click(function(){
+		addSong();
+		displayList(myPlayList);
+	});
 	
-	$("#submit").click(function() {
+	$("#clear").click(function(){
 	clearList();
 	console.log("hi");
 	});
@@ -68,18 +71,19 @@ $( document ).ready(function() {
 // displaySong uses the properties in the songObject to create an HTML element for a single song
 //	  and appends the element to the playlist on the page
 function displaySong(songObject){
-	$("body").append("<div id='songInfo'></div>");
-	$("#songInfo").append("<p>" + mySong.title + "</p>");
-    $("#songInfo").append("<p>" + mySong.artist + "</p>");
-    $("#songInfo").append('<img src="' + mySong.imageURL + '"</p>');
-    $("#songInfo").append('<a href="' + mySong.playURL + '"> Play Song</a>');
+	$("body").append("<div id='songInfo'></div>")
+	$("#songInfo").append("<p>" + songObject.title + "</p>");
+    $("#songInfo").append("<p>" + songObject.artist + "</p>");
+    $("#songInfo").append('<img src="' + songObject.imageURL + '"</p>');
+    $("#songInfo").append('<a href="' + songObject.playURL + '"> Play Song</a>');
 }
 
 // displayList takes in an array of song objects, and it uses the information from each song object
 //    to create an HTML element and append it to the playlist on the page
 function displayList(songsArray){
 	 for (var i = 0; i < myPlayList.length; i++){
-	 	displaySong(myPlayList[i]);
+	 	displaySong(songsArray[i]);
+	 	console.log(songsArray[i]);
 	    // $("body").append(myPlayList[i].title);
 	    // $("body").append(myPlayList[i].artist);
 	    // $("body").append('<img src = "' + myPlayList[i].imageURL + '"</p>');
@@ -102,4 +106,5 @@ function addSong(){
         "imageURL": $("#album-image").val()
     };
 	myPlayList.push(newSong);
+	//console.log(myPlayList);
 }
